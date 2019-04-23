@@ -1,7 +1,6 @@
-class Cards
+class Card
   
-  suit = { K+: 10}
   def initialize
-  @cards[suit] = {}
+  @cards = []
   end
 end
