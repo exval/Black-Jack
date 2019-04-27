@@ -1,6 +1,8 @@
 class Card
   
-  SUIT = %[<3 <> + ^].freeze
+  attr_accessor :suit, :value, :rank
+
+  SUIT = %w[<3 <> + ^].freeze
   VALUE_CARDS = {
     "2" => 2,
     "3" => 3,
@@ -16,16 +18,18 @@ class Card
     "K" => 10,
     "A" => 11
   }
-  
-  attr_reader :cards
 
-
-  def initialize(suit, value)
+  def initialize(rank, suit, value)
     @suit = suit
     @value = value
+    @rank = rank
   end
 
   def ace?
     @value == 11 
+  end
+
+  def show_dec
+    print "rank: #{rank}| suit: #{suit}| value: #{value}"
   end
 end
