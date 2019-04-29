@@ -1,4 +1,4 @@
-require_relative 'card'
+# require_relative 'card'
 
 
 class Desk
@@ -19,7 +19,7 @@ class Desk
   def genered_deck
     Card::SUIT.each do |suit|
       Card::VALUE_CARDS.each do |rank, value|
-        @cards << Card.new(rank, suit, value)
+        cards << Card.new(rank, suit, value)
       end
     end
   end

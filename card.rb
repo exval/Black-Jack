@@ -29,7 +29,7 @@ class Card
     @value == 11 
   end
 
-  def show_dec
+  def show_card
     print "rank: #{rank}| suit: #{suit}| value: #{value}"
   end
 end
