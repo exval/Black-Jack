@@ -6,29 +6,25 @@ class Hand
   attr_accessor :cards
 
     MAX_SCORE = 21.freeze
+    MAX_CARDS = 3.freeze
 
   def initialize
-    @cards = {}
+    @cards = []
   end
 
-  def open_cards
-    cards.each_key(&:show_card)
-  end
+  def score
+  sum ||= 0
+  sum = @cards.sum(&:value)
 
-  def take_card
-    
+  @cards.each do |card|
+    if sum > MAX_SCORE && card.ace?
+      sum -= Card::ACE_SECOND
+    end
   end
-
-  def check
-    
+  sum
   end
-
-  def card_score
-    
+  
+  def full?
+    @cards.size == MAX_CARDS
   end
-
-  def total_score
-    
-  end
-
 end
