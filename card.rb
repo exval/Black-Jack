@@ -1,6 +1,6 @@
 class Card
   
-  attr_accessor :suit, :value, :rank
+  attr_accessor :suit, :value, :rank, :type
 
   ACE_SECOND = 10
   SUIT = %w[<3 <> + ^].freeze
@@ -20,10 +20,11 @@ class Card
     "A" => 11
   }.freeze
 
-  def initialize(rank, suit, value)
+  def initialize(rank, suit, value, type = :closed)
     @suit = suit
     @value = value
     @rank = rank
+    @type = type
   end
 
   def ace?

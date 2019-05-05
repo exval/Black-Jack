@@ -11,11 +11,11 @@ class Player
     @hand = Hand.new
   end
 
-  def get_amount
+  def get_amount(amount)
     @bank += amount
   end
 
-  def lose_amount
+  def lose_amount(bet)
     @bank -= bet
     @bank = 0 if bet < 0
   end
@@ -34,5 +34,6 @@ class Player
   end
 
   def open_cards
+    @hand.cards.each { |card| card.type = :open }
   end
 end

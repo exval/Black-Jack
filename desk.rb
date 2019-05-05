@@ -1,6 +1,3 @@
-# require_relative 'card'
-
-
 class Desk
   attr_accessor :cards
 
@@ -8,10 +5,10 @@ class Desk
     @cards = genered_deck
   end
 
-  def take_cards
+  def remove_from_deca(card)
     raise 'Нет карт' if @cards.size.zero?
 
-    cards.pop    
+    @cards.delete(card)
   end
 
   def genered_deck

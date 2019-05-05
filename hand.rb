@@ -1,6 +1,3 @@
-# require_relative 'card'
-# require_relative 'desk'
-
 class Hand
 
   attr_accessor :cards
@@ -13,14 +10,14 @@ class Hand
   end
 
   def score
-  sum ||= 0
-  sum = @cards.sum(&:value)
+    sum ||= 0
+    sum = @cards.sum(&:value)
 
-  @cards.each do |card|
-    if sum > MAX_SCORE && card.ace?
-      sum -= Card::ACE_SECOND
+    @cards.each do |card|
+      if sum > MAX_SCORE && card.ace?
+        sum -= Card::ACE_SECOND
+      end
     end
-  end
   sum
   end
   

@@ -8,8 +8,8 @@ class Bank
   end
 
   def bet(player, dealer)
-    player.lose_bet(BET)
-    dealer.lose_bet(BET)
+    player.lose_amount(BET)
+    dealer.lose_amount(BET)
     @amount = BET * 2
   end
 
@@ -17,15 +17,17 @@ class Bank
     player.bank < BET
   end
 
-  def reward
-
+  def reward(player)
+    player.get_amount(@amount)
   end
 
-  def draw
-    
+  def draw(player, dealer)
+    player.get_amount(@amount/2)
+    dealer.get_amount(@amount/2)
+    @amount = 0
   end
 
-  def can_bet?
-    
+  def can_bet?(player)
+    player.bank >= BET
   end
 end
