@@ -1,6 +1,6 @@
 class Interface
   GREET = 'Добро пожаловать в игру Black-Jack'
-  LINE = '___________________________________'
+  LINE = "\n"
   ACTIONS_USER = [
     'Пропустить ход',
     'Взять карту',
@@ -38,10 +38,10 @@ class Interface
       if card.type == :closed
         print '*'
       else
-        print card.rank + card.suit
+        print card.rank + card.suit + "|"
       end
     end
-    puts
+    puts LINE
     puts LINE
   end
 
@@ -57,16 +57,19 @@ class Interface
 
   def dealer_check(dealer)
     puts ACTIONS_DEALER[0]
+    puts LINE
   end
 
   def dealer_take_card(dealer)
-    puts ACTIONS_DEALER[1]    
+    puts ACTIONS_DEALER[1]
+    puts LINE    
   end
 
   def dealer_scores_info(dealer)
     puts ACTIONS_DEALER[2]
     dealer_cards(dealer)
-    puts "#{dealer.hand.score}"
+    puts "Очки диллера: #{dealer.hand.score}"
+    puts LINE
   end
 
   def bet_info(bank)
@@ -74,11 +77,11 @@ class Interface
   end
 
   def lose_info
-    puts "Проиграл."
+    puts "Ты проиграл."
   end
 
   def win_info
-    puts "Выиграл."
+    puts "Ты выиграл."
   end
 
   def draw_info
@@ -96,8 +99,9 @@ class Interface
   end
 
   def choice_action
-      ACTIONS_USER.each.with_index(1) do |action, index|
-        puts "#{index}. #{action}"
+    puts "Ваши действия:"
+    ACTIONS_USER.each.with_index(1) do |action, index|
+      puts "#{index}. #{action}"
     end
     input = gets.to_i
       #дописать метод. добавить breakif или включить в класс game

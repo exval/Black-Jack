@@ -6,7 +6,6 @@ require_relative 'player'
 require_relative 'dealer'
 require_relative 'interface'
 
-
 class Game
   attr_reader :bank, :deck, :dealer, :player, :interface
 
@@ -93,9 +92,10 @@ end
       bet
       @interface.bet_info(@bank)
     else
-      @interface.open_cards_info
+      # @interface.open_cards_info
       referee
     end
+    
     @interface.dealer_cards(@dealer)
     @interface.user_cards(@user)
   end
