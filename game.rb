@@ -65,6 +65,8 @@ end
 
   def dealer_turn
     return if @state == :referee
+
+    @interface.dealer_cards(@dealer)
     if @dealer.take_card?
       @interface.dealer_take_card(@dealer)
       deal_cards(@dealer, 1)
@@ -74,8 +76,9 @@ end
   end
 
   def round
+    @interface.user_cards(@user)
+    
     input = @interface.choice_action
-
     case input
     when 1
       dealer_turn
@@ -92,10 +95,8 @@ end
       bet
       @interface.bet_info(@bank)
     else
-      # @interface.open_cards_info
       referee
     end
-    
     @interface.dealer_cards(@dealer)
     @interface.user_cards(@user)
   end
@@ -145,14 +146,14 @@ end
       @state = :finish
     end
   end
-
+  
   def reset
     @user.take_new_dec
     @dealer.take_new_dec
   end
 
   def no_any_turn?
-    !@user.hand.full?
+    @user.hand.full?
   end
 
 end
