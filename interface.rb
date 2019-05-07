@@ -51,7 +51,7 @@ class Interface
     user.hand.cards.each do |card|
       print card.rank + card.suit + "|"
     end
-    puts "Очки: #{user.hand.score}"
+    puts "Очки #{user}: #{user.hand.score}"
     puts LINE 
   end
 
@@ -70,6 +70,11 @@ class Interface
     dealer_cards(dealer)
     puts "Очки диллера: #{dealer.hand.score}"
     puts LINE
+  end
+
+  def open_all(user, dealer)
+    dealer_scores_info(dealer)
+    user_cards(user)
   end
 
   def bet_info(bank)

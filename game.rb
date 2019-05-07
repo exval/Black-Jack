@@ -112,8 +112,9 @@ end
 
   def referee
     winner = scoring
-    @dealer.open_cards
-    @interface.dealer_scores_info(@dealer)
+    # @dealer.open_cards
+    # @interface.dealer_scores_info(@dealer)
+    @interface.open_all(@user, @dealer)
     @state = :referee
     case winner
     when Player
