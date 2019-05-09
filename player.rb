@@ -1,12 +1,11 @@
 class Player
-
-  START_BANK = 100.freeze
+  START_BANK = 100
 
   attr_reader :name, :hand
   attr_accessor :bank
 
   def initialize(name)
-    @name = name 
+    @name = name
     @bank = START_BANK
     @hand = Hand.new
   end

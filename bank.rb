@@ -1,7 +1,7 @@
 class Bank
   attr_reader :amount
-  
-  BET = 10.freeze
+
+  BET = 10
 
   def initialize
     @amount = 0
@@ -22,8 +22,8 @@ class Bank
   end
 
   def draw(player, dealer)
-    player.get_amount(@amount/2)
-    dealer.get_amount(@amount/2)
+    player.get_amount(@amount / 2)
+    dealer.get_amount(@amount / 2)
     @amount = 0
   end
 

@@ -1,6 +1,6 @@
 class Interface
-  GREET = 'Добро пожаловать в игру Black-Jack'
-  LINE = "\n"
+  GREET = 'Добро пожаловать в игру Black-Jack'.freeze
+  LINE = "\n".freeze
   ACTIONS_USER = [
     'Пропустить ход',
     'Взять карту',
@@ -13,7 +13,7 @@ class Interface
     'Диллер открывает карты'
   ].freeze
 
-  def initialize 
+  def initialize
     greet
   end
 
@@ -38,7 +38,7 @@ class Interface
       if card.type == :closed
         print '*'
       else
-        print card.rank + card.suit + "|"
+        print card.rank + card.suit + '|'
       end
     end
     puts LINE
@@ -49,20 +49,20 @@ class Interface
     puts "Игрок: #{user.name}, #{user.bank} $"
 
     user.hand.cards.each do |card|
-      print card.rank + card.suit + "|"
+      print card.rank + card.suit + '|'
     end
     puts "Очки: #{user.hand.score}"
-    puts LINE 
+    puts LINE
   end
 
-  def dealer_check(dealer)
+  def dealer_check(_dealer)
     puts ACTIONS_DEALER[0]
     puts LINE
   end
 
-  def dealer_take_card(dealer)
+  def dealer_take_card(_dealer)
     puts ACTIONS_DEALER[1]
-    puts LINE    
+    puts LINE
   end
 
   def dealer_scores_info(dealer)
@@ -82,20 +82,19 @@ class Interface
   end
 
   def lose_info
-    puts "Ты проиграл."
+    puts 'Ты проиграл.'
   end
 
   def win_info
-    puts "Ты выиграл."
+    puts 'Ты выиграл.'
   end
 
   def draw_info
-    puts "Ничья."
+    puts 'Ничья.'
   end
 
-
   def continue?
-    puts "Хотите продожить?(Д/н)"
+    puts 'Хотите продожить?(Д/н)'
     choice = gets.chomp.downcase
   end
 
@@ -104,12 +103,10 @@ class Interface
   end
 
   def choice_action
-    puts "Ваши действия:"
+    puts 'Ваши действия:'
     ACTIONS_USER.each.with_index(1) do |action, index|
       puts "#{index}. #{action}"
     end
-    input = gets.to_i 
+    input = gets.to_i
   end
 end
-
-

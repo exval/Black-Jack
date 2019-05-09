@@ -24,8 +24,8 @@ class Game
   end
 
   def launch
-    while @state != :finish do
-      if have_money?
+    while @state != :finish
+      if money?
         distribution
         init_interface
       else
@@ -33,15 +33,13 @@ class Game
         break
       end
 
-    while @state != :referee do
-      round
-    end
-    one_more_game?
+      round while @state != :referee
+      one_more_game?
   end
 end
-  
+
   def deal_cards(player, number)
-    number.times do |time|
+    number.times do |_time|
       card = @desk.cards.first
       player.get_card(card)
       @desk.remove_from_deca(card)
@@ -54,9 +52,10 @@ end
     @user.open_cards
     @dealer.close_cards
   end
-  
+
   def user_turn
     return if @user.hand.full?
+
     deal_cards(@user, 1)
     @interface.user_cards(@user)
   end
@@ -75,7 +74,7 @@ end
 
   def round
     @interface.user_cards(@user)
-    
+
     input = @interface.choice_action
     case input
     when 1
@@ -89,7 +88,7 @@ end
   end
 
   def init_interface
-    if @bank.can_bet?(@user) && @bank.can_bet?(@dealer) 
+    if @bank.can_bet?(@user) && @bank.can_bet?(@dealer)
       bet
       @interface.bet_info(@bank)
     else
@@ -98,7 +97,7 @@ end
     @interface.dealer_cards(@dealer)
   end
 
-  def scoring 
+  def scoring
     return if @user.score > Hand::MAX_SCORE && @dealer.score > Hand::MAX_SCORE
     return if @user.score == @dealer.score
     return @dealer if @user.score > Hand::MAX_SCORE
@@ -128,15 +127,15 @@ end
     @bank.bet(@user, @dealer)
   end
 
-  def have_money?
-    @user.bank > Bank::BET ? true : false
+  def money?
+    @user.bank > Bank::BET
   end
 
   def one_more_game?
     input = @interface.continue?
     if input == 'д'
       @state = :playing
-      reset 
+      reset
       puts 'Новый раунд'
     elsif input == 'н'
       @state = :finish
@@ -144,7 +143,7 @@ end
       one_more_game?
     end
   end
-  
+
   def reset
     @user.take_new_dec
     @dealer.take_new_dec

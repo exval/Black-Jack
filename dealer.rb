@@ -1,6 +1,5 @@
 class Dealer < Player
-
-  def initialize 
+  def initialize
     super 'Dealer'
   end
 
