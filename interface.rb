@@ -51,7 +51,7 @@ class Interface
     user.hand.cards.each do |card|
       print card.rank + card.suit + "|"
     end
-    puts "Очки #{user}: #{user.hand.score}"
+    puts "Очки: #{user.hand.score}"
     puts LINE 
   end
 
@@ -108,9 +108,7 @@ class Interface
     ACTIONS_USER.each.with_index(1) do |action, index|
       puts "#{index}. #{action}"
     end
-    input = gets.to_i
-      #дописать метод. добавить breakif или включить в класс game
-      #и там уже реализовать цепочку. 
+    input = gets.to_i 
   end
 end
 

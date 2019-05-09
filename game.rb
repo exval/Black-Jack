@@ -7,7 +7,7 @@ require_relative 'dealer'
 require_relative 'interface'
 
 class Game
-  attr_reader :bank, :deck, :dealer, :player, :interface
+  attr_reader :bank, :deck, :dealer, :interface
 
   def initialize
     @desk = Desk.new
@@ -39,8 +39,6 @@ class Game
     one_more_game?
   end
 end
-
-  # protected
   
   def deal_cards(player, number)
     number.times do |time|
@@ -98,7 +96,6 @@ end
       referee
     end
     @interface.dealer_cards(@dealer)
-    @interface.user_cards(@user)
   end
 
   def scoring 
@@ -112,15 +109,13 @@ end
 
   def referee
     winner = scoring
-    # @dealer.open_cards
-    # @interface.dealer_scores_info(@dealer)
     @interface.open_all(@user, @dealer)
     @state = :referee
     case winner
-    when Player
+    when @user
       @interface.win_info
       @bank.reward(@user)
-    when Dealer
+    when @dealer
       @interface.lose_info
       @bank.reward(@dealer)
     else
@@ -143,8 +138,10 @@ end
       @state = :playing
       reset 
       puts 'Новый раунд'
-    else
+    elsif input == 'н'
       @state = :finish
+    else
+      one_more_game?
     end
   end
   
@@ -152,11 +149,6 @@ end
     @user.take_new_dec
     @dealer.take_new_dec
   end
-
-  def no_any_turn?
-    @user.hand.full?
-  end
-
 end
 
 game = Game.new
