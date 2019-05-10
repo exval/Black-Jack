@@ -38,10 +38,10 @@ class Game
   end
 end
 
-  def deal_cards(player, number)
-    number.times do |_time|
+  def deal_cards(user, number)
+    number.times do |time|
       card = @desk.cards.first
-      player.get_card(card)
+      user.get_card(card)
       @desk.remove_from_deca(card)
     end
   end
@@ -68,13 +68,14 @@ end
       @interface.dealer_take_card(@dealer)
       deal_cards(@dealer, 1)
     else
+      return unless @dealer.take_card?
       @interface.dealer_check(@dealer)
     end
   end
 
   def round
+    return referee if !any_move?
     @interface.user_cards(@user)
-
     input = @interface.choice_action
     case input
     when 1
@@ -85,6 +86,7 @@ end
     when 3
       referee
     end
+     return puts 'Выбор сделан'
   end
 
   def init_interface
@@ -121,6 +123,7 @@ end
       @interface.draw_info
       @bank.draw(@user, @dealer)
     end
+    @interface.bank_info(@user, @dealer)
   end
 
   def bet
@@ -133,15 +136,19 @@ end
 
   def one_more_game?
     input = @interface.continue?
-    if input == 'д'
+    if input == true
       @state = :playing
       reset
       puts 'Новый раунд'
-    elsif input == 'н'
+    elsif input == false
       @state = :finish
     else
       one_more_game?
     end
+  end
+
+  def any_move?
+    !@user.hand.full?
   end
 
   def reset

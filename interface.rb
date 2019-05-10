@@ -22,10 +22,6 @@ class Interface
     gets.chomp
   end
 
-  def avaible_actions
-    puts ACTIONS_USER
-  end
-
   def user_action
     choice_action
   end
@@ -42,7 +38,6 @@ class Interface
       end
     end
     puts LINE
-    puts LINE
   end
 
   def user_cards(user)
@@ -51,24 +46,25 @@ class Interface
     user.hand.cards.each do |card|
       print card.rank + card.suit + '|'
     end
-    puts "Очки: #{user.hand.score}"
+    puts "\nОчки: #{user.hand.score}"
     puts LINE
   end
 
-  def dealer_check(_dealer)
+  def dealer_check(dealer)
     puts ACTIONS_DEALER[0]
     puts LINE
   end
 
-  def dealer_take_card(_dealer)
+  def dealer_take_card(dealer)
     puts ACTIONS_DEALER[1]
     puts LINE
   end
 
   def dealer_scores_info(dealer)
     puts ACTIONS_DEALER[2]
+    dealer.open_cards
     dealer_cards(dealer)
-    puts "Очки диллера: #{dealer.hand.score}"
+    puts "Очки: #{dealer.hand.score}"
     puts LINE
   end
 
@@ -79,6 +75,13 @@ class Interface
 
   def bet_info(bank)
     puts "Текущая ставка: #{bank.amount} $"
+  end
+
+  def bank_info(user, dealer)
+    puts LINE
+    puts "Баланс #{user.name}: #{user.bank}"
+    puts "Баланс диллера: #{dealer.bank}"
+    puts LINE
   end
 
   def lose_info
@@ -94,8 +97,10 @@ class Interface
   end
 
   def continue?
-    puts 'Хотите продожить?(Д/н)'
+    puts 'Хотите продожить?(y\n)'
     choice = gets.chomp.downcase
+    return true if choice == 'y'
+    return false if choice == 'n'
   end
 
   def greet
@@ -104,9 +109,9 @@ class Interface
 
   def choice_action
     puts 'Ваши действия:'
-    ACTIONS_USER.each.with_index(1) do |action, index|
-      puts "#{index}. #{action}"
-    end
+      ACTIONS_USER.each.with_index(1) do |action, index|
+        puts "#{index}. #{action}"
+      end
     input = gets.to_i
   end
 end

@@ -6,6 +6,7 @@ class Hand
 
   def initialize
     @cards = []
+    @summary ||= 0
   end
 
   def score
@@ -17,7 +18,7 @@ class Hand
     end
     sum
   end
-
+  
   def full?
     @cards.size == MAX_CARDS
   end

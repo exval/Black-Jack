@@ -20,7 +20,8 @@ class Player
   end
 
   def score
-    @hand.score
+    summary ||= 0
+    summary += @hand.score
   end
 
   def get_card(card)

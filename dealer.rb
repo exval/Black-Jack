@@ -8,6 +8,6 @@ class Dealer < Player
   end
 
   def take_card?
-    @hand.score < 17
+    @hand.score < 17 && Hand::MAX_CARDS <= 3
   end
 end

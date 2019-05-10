@@ -2,7 +2,7 @@ class Card
   attr_accessor :suit, :value, :rank, :type
 
   ACE_SECOND = 10
-  SUIT = %w[<3 <> + ^].freeze
+  SUIT = %w[♥ ♦ ♣ ♠].freeze
   VALUE_CARDS = {
     '2' => 2,
     '3' => 3,
