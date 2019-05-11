@@ -1,12 +1,12 @@
 class Hand
-  attr_accessor :cards
+  attr_accessor :cards, :last_var
 
   MAX_SCORE = 21
   MAX_CARDS = 3
 
   def initialize
     @cards = []
-    @summary ||= 0
+    @last_var = 0
   end
 
   def score
@@ -17,9 +17,15 @@ class Hand
       sum -= Card::ACE_SECOND if sum > MAX_SCORE && card.ace?
     end
     sum
+    @last_var = sum
   end
   
+  def summary
+    @last_var
+  end
+
   def full?
     @cards.size == MAX_CARDS
   end
 end
+ 

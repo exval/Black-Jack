@@ -2,12 +2,12 @@ require_relative 'bank'
 require_relative 'card'
 require_relative 'desk'
 require_relative 'hand'
-require_relative 'player'
+require_relative 'user'
 require_relative 'dealer'
 require_relative 'interface'
 
 class Game
-  attr_reader :bank, :deck, :dealer, :interface
+  attr_reader :bank, :desk, :dealer, :interface
 
   def initialize
     @desk = Desk.new
@@ -20,7 +20,7 @@ class Game
 
   def add_user
     name = @interface.create_user
-    @user = Player.new(name)
+    @user = User.new(name)
   end
 
   def launch
@@ -58,6 +58,7 @@ end
 
     deal_cards(@user, 1)
     @interface.user_cards(@user)
+    @user.hand.score
   end
 
   def dealer_turn
@@ -67,9 +68,10 @@ end
     if @dealer.take_card?
       @interface.dealer_take_card(@dealer)
       deal_cards(@dealer, 1)
+      @dealer.hand.score
     else
       return unless @dealer.take_card?
-      @interface.dealer_check(@dealer)
+      @interface.dealer_check
     end
   end
 
@@ -80,13 +82,15 @@ end
     case input
     when 1
       dealer_turn
+      return puts :check
     when 2
       user_turn
       dealer_turn
+      return puts :take_card
     when 3
       referee
+      return puts :open_cards
     end
-     return puts 'Выбор сделан'
   end
 
   def init_interface
@@ -105,7 +109,7 @@ end
     return @dealer if @user.score > Hand::MAX_SCORE
     return @user if @dealer.score > Hand::MAX_SCORE
 
-    [@user, dealer].max_by(&:score)
+    [@user, @dealer].max_by(&:score)
   end
 
   def referee

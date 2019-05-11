@@ -1,4 +1,4 @@
-class Player
+class User
   START_BANK = 100
 
   attr_reader :name, :hand
@@ -20,8 +20,7 @@ class Player
   end
 
   def score
-    summary ||= 0
-    summary += @hand.score
+    hand.summary
   end
 
   def get_card(card)

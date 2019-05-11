@@ -50,7 +50,7 @@ class Interface
     puts LINE
   end
 
-  def dealer_check(dealer)
+  def dealer_check
     puts ACTIONS_DEALER[0]
     puts LINE
   end
